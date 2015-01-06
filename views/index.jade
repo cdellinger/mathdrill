@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	.row
+		.col-md-2
+			| &nbsp;
+		.col-md-8
+			.math_panel
+				form(method='post', action='/quiz')
+					.row.text-center#startRow
+						input#radioAnnika(type='radio', value='annika', name='radioUser')
+						| &nbsp;Annika&nbsp;&nbsp;
+						input#radioEli(type='radio', value='eli', name='radioUser', checked='true')
+						| &nbsp;Eli
+						br
+						label # of Questions&nbsp;
+						input#numberQuestions(type='text', value='10', name='numberQuestions')
+						br
+						br
+						button.btn.btn-warning.btn-lg(onclick='startQuestions()') Start
+		.col-md-2
+			| &nbsp;
+

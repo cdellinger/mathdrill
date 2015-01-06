@@ -1,0 +1,83 @@
+extends layout
+
+block content
+	style.
+		.math_question {
+			font-size:6em;
+			font-weight:bold;	
+		}
+
+	br
+
+	.row
+		.col-md-2
+			| &nbsp;
+		.col-md-8.math_panel
+			.row#statsRow
+				.col-md-1.text-center
+					span(id='answered_questions') 1
+					| &nbsp;of&nbsp;
+					span(id='total_questions') 0
+				.col-md-10
+					.progress#progress_bar
+						.progress-bar.progress-bar-success(role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:0%;')
+						p 0%			
+				.col-md-1
+					.text-center
+						span(id='total_time') 00:00
+
+			.math_question(id='questionRow')
+				span(id='field1')
+				| &nbsp;*&nbsp;
+				span(id='field2')
+				| &nbsp;=
+
+			.math_question(id='questionRow2')
+				input(type='text', id='answer', style='width:25%', maxlength='3', on)
+
+			.text-center(id='resultsRow')
+				h2 Total Time:&nbsp;
+					span(id='finishTotalTime') seconds
+				h2 Questions Answered:&nbsp;
+					span(id='questionsAnswered')
+				h2 Total Missed:&nbsp;
+					span(id='totalMissed')
+				h2 Score:&nbsp;
+					span(id='score')
+				.panel#errors
+				input(type='hidden', id='userId', value='#{userId}')
+				a.btn.btn-primary(href='/') New Quiz
+
+		.col-md-2
+			| &nbsp;
+
+
+	script.
+		setupQuestions = function(){
+			$('#statsRow').hide();
+			$('#progressRow').hide();
+			$('#questionRow').hide();
+			$('#resultsRow').hide();
+
+			var min = 0;
+			var max = 12;
+			var totalQuestions = !{JSON.stringify(questions)};
+
+
+
+			var total = totalQuestions.length;
+			//randomize
+			for (var x=0;x<total;x++){
+				var pos = Math.floor((Math.random() * totalQuestions.length));
+				questions.push(totalQuestions[pos]);
+				totalQuestions.splice(pos,1);
+			}
+			$('#total_questions').html(questions.length);	
+			startQuestions();
+		}
+
+		$("#answer").keyup(function (e) {
+		    if (e.keyCode == 13) {
+		        nextQuestion();
+		    }
+		});

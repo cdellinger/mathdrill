@@ -1,0 +1,28 @@
+body {
+  padding: 5px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.math_panel{
+	border-radius:5px;
+	background-color:rgba(0,0,0,.7);
+	text-align:center;
+	margin-bottom:10px;
+	color:lime;
+	padding:10px;
+}
+
+#answer{
+	background:none;
+	border:none;
+	border-color:transparent;
+	border-bottom: dotted lime 1px;
+	text-align:center;
+}
+#answer:focus{
+	outline-width:0;
+}
